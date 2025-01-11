@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: "fixedsys";
   src: url("../static/assets/FSEX300.ttf") format("truetype");
@@ -95,4 +99,20 @@ body {
 
 #start-text p {
   margin: 0;
+}
+
+/* START BUTTON */
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.enter-button {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  font-family: "fixedsys";
 }

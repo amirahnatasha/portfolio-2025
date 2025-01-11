@@ -7,16 +7,20 @@
     <title>Personal Website - 2025</title>
   </head>
   <body>
-    <canvas class="threejs"></canvas>
-    <script type="module" src="main.js"></script>
-
-    <div id="text-name">
-      <div class="line typing">Amirah Natasha</div>
-      <div class="line typing">Software Developer</div>
+    <div class="container">
+      <button class="enter-button">Click to Enter</button>
     </div>
 
-    <div id="start-text">
-      <p>Click anywhere to start</p>
-    </div>
+    <script>
+      const mouseUpSound = new Audio("../sounds/mouse_up.mp3");
+
+      document.querySelector("button").addEventListener("click", function () {
+        mouseUpSound.play();
+
+        setTimeout(function () {
+          window.location.href = "scene.html";
+        }, mouseUpSound.duration * 1000);
+      });
+    </script>
   </body>
 </html>
