@@ -3,13 +3,19 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 // initialize the scene
 const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x87ceeb);
 
 // add objects to scene
 const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
 const cubeMaterial = new THREE.MeshBasicMaterial({ color: "red" });
-
 const cubeMesh = new THREE.Mesh(cubeGeometry, cubeMaterial);
 scene.add(cubeMesh);
+
+// Create edges and outline
+const edges = new THREE.EdgesGeometry(cubeGeometry);
+const lineMaterial = new THREE.LineBasicMaterial({ color: 0x00ff00, linewidth: 2 });
+const line = new THREE.LineSegments(edges, lineMaterial);
+scene.add(line);
 
 // initialize camera
 const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 200);

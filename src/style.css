@@ -1,4 +1,98 @@
+@font-face {
+  font-family: "fixedsys";
+  src: url("../static/assets/FSEX300.ttf") format("truetype");
+}
+
 body {
   margin: 0;
   overflow: hidden;
+  font-family: "fixedsys";
+}
+
+/* NAME TEXT */
+#text-name {
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  z-index: 10;
+}
+
+.line {
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  display: block;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid;
+}
+
+.line:nth-child(1) {
+  animation: typing 2s steps(22) forwards, blink 0.5s step-end infinite alternate;
+  animation-delay: 0s;
+}
+
+.line:nth-child(2) {
+  visibility: hidden;
+  animation: typing 2s steps(22) forwards, blink 0.5s step-end infinite alternate;
+  animation-delay: 3s;
+}
+
+.line:nth-child(3) {
+  visibility: hidden;
+  animation: typing 2s steps(22) forwards, blink 0.5s step-end infinite alternate;
+  animation-delay: 6s;
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+    visibility: hidden;
+  }
+  100% {
+    width: 100%;
+    visibility: visible;
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: white;
+  }
+}
+
+.line:nth-child(1):not(:last-child) {
+  animation: typing 2s steps(22) forwards, blink 0.5s step-end infinite alternate, hideCursor 0.5s forwards;
+}
+
+@keyframes hideCursor {
+  0% {
+    border-color: white;
+  }
+  100% {
+    border-color: transparent;
+  }
+}
+
+/* START TEXT */
+#start-text {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+}
+
+#start-text p {
+  margin: 0;
 }
