@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <title>Personal Website - 2025</title>
+    <link rel="stylesheet" crossorigin href="./assets/index-DeZBMrIp.css">
+  </head>
+  <body>
+    <div class="container">
+      <button class="enter-button">Click to Enter</button>
+    </div>
+
+    <script>
+      const mouseUpSound = new Audio("../sounds/mouse_up.mp3");
+
+      document.querySelector("button").addEventListener("click", function () {
+        mouseUpSound.play();
+
+        setTimeout(function () {
+          window.location.href = "scene.html";
+        }, mouseUpSound.duration * 1000);
+      });
+    </script>
+  </body>
+</html>
