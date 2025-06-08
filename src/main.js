@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { createOldPC } from "./pc.js";
 
 // add mouse and keyboard sound
 const mouseUpSound = new Audio("../sounds/mouse_up.mp3");
@@ -30,25 +31,24 @@ document.addEventListener("keydown", () => {
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x87ceeb);
 
-// add objects to scene
-const cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-const cubeMaterial = new THREE.MeshBasicMaterial({ color: "red" });
-const cubeMesh = new THREE.Mesh(cubeGeometry, cubeMaterial);
-scene.add(cubeMesh);
+// pc model
+const oldPC = createOldPC();
+scene.add(oldPC);
 
-// Create edges and outline
-const edges = new THREE.EdgesGeometry(cubeGeometry);
-const lineMaterial = new THREE.LineBasicMaterial({ color: 0x00ff00, linewidth: 2 });
-const line = new THREE.LineSegments(edges, lineMaterial);
-scene.add(line);
+//lighting
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+scene.add(ambientLight);
 
-// initialize camera
-const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 200);
+const dirLight = new THREE.DirectionalLight(0xffffff, 0.7);
+dirLight.position.set(5, 10, 7);
+scene.add(dirLight);
 
-const aspectRatio = window.innerWidth / window.innerHeight;
-
-//const camera = new THREE.OrthographicCamera(-1 * aspectRatio, 1 * aspectRatio, 1, -1, 0.1, 200);
-camera.position.z = 5;
+// orthographic camera
+const aspect = window.innerWidth / window.innerHeight;
+const d = 6;
+const camera = new THREE.OrthographicCamera(-d * aspect, d * aspect, d, -d, 0.1, 100);
+camera.position.set(10, 10, 10);
+camera.lookAt(0, 1, 0);
 
 // initialize renderer
 const canvas = document.querySelector("canvas.threejs");
@@ -64,7 +64,11 @@ controls.enableDamping = true;
 controls.autoRotate = true;
 
 window.addEventListener("resize", () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
+  const aspect = window.innerWidth / window.innerHeight;
+  camera.left = -d * aspect;
+  camera.right = d * aspect;
+  camera.top = d;
+  camera.bottom = -d;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
